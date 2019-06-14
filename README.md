@@ -2,7 +2,7 @@
 This projects implements a Python Wrapper for the temporal tagger [HeidelTime](https://github.com/HeidelTime/heideltime). To achieve that, it makes use of the HeidelTime-standalone program.
 
 ## Installation
-To use Python_HeidelTime, it is necessary to install HeidelTime-standalone first. A current download can be found on their [releases page](https://github.com/HeidelTime/heideltime/releases). At the point of the development of this project, version 2.2.1 was the most current one. Support for newer or older versions is not guaranteed. An detailed description of the installation process is found in the [HeidelTime Standalone Manual](https://gate.ac.uk/gate/plugins/Tagger_GATE-Time/doc/HeidelTime-Standalone-Manual.pdf)
+To use Python_HeidelTime, it is necessary to install HeidelTime-standalone first. A current download can be found on their [releases page](https://github.com/HeidelTime/heideltime/releases). At the point of the development of this project, version 2.2.1 was the most current one. Support for newer or older versions is not guaranteed. A detailed description of the installation process is found in the [HeidelTime Standalone Manual](https://gate.ac.uk/gate/plugins/Tagger_GATE-Time/doc/HeidelTime-Standalone-Manual.pdf)
 
 For usage in Python, it is sufficient to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to Heideltime-standalone has to specified as a string object.
 
@@ -22,7 +22,7 @@ heideltime_parser.set_document_type('NEWS')
 print(heideltime_parser.parse('Yesterday, I bought a cat! It was born earlier this year.'))
 ```
 
-Which should result in the following output.
+Which should result in the following output (in regard to your current date).
 
 ```
 <?xml version="1.0"?>
