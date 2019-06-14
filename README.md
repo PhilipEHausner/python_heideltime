@@ -16,18 +16,18 @@ After initialization, a text can be parsed by the parse function by passing the 
 
 The following code snippet works a simple example.
 
-'''python
+```python
 heideltime_parser = Heideltime()
 heideltime_parser.set_document_type('NEWS')
 print(heideltime_parser.parse('Yesterday, I bought a cat! It was born earlier this year.'))
-'''
+```
 
 Which should result in the following output.
 
-'''
+```
 <?xml version="1.0"?>
 <!DOCTYPE TimeML SYSTEM "TimeML.dtd">
 <TimeML>
 <TIMEX3 tid="t1" type="DATE" value="2019-06-13">Yesterday</TIMEX3>, I bought a cat! It was born <TIMEX3 tid="t3" type="DATE" value="2019" mod="START">earlier this year</TIMEX3>.
 </TimeML>
-'''
+```
