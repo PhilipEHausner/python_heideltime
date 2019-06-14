@@ -1,0 +1,6 @@
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# config file
+config_Heideltime.py
