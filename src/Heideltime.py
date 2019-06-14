@@ -106,7 +106,3 @@ class Heideltime:
         inputs.append(temp.name)
         # execute string in the bash shell
         return subprocess.check_output(inputs).decode('utf-8')
-
-heideltime_parser = Heideltime()
-heideltime_parser.set_document_type('NEWS')
-print(heideltime_parser.parse('Yesterday, I bought a cat! It was born earlier this year.'))
