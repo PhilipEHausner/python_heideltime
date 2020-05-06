@@ -9,7 +9,6 @@ For usage in Python, it is sufficient to specify the installation directory of H
 For system wide usage a setup.py is provided that installs python_heideltime as a package. It can be used for installation by:
 ```
 python3 -m pip install . 
-
 ```
 
 When using Python_HeidelTime, please cite also HeidelTime itself as stated on their [project page](https://github.com/HeidelTime/heideltime).
