@@ -6,6 +6,12 @@ To use Python_HeidelTime, it is necessary to install HeidelTime-standalone first
 
 For usage in Python, it is sufficient to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to Heideltime-standalone has to specified as a string object.
 
+For system wide usage a setup.py is provided that installs python_heideltime as a package. It can be used for installation by:
+```
+python3 -m pip install . 
+
+```
+
 When using Python_HeidelTime, please cite also HeidelTime itself as stated on their [project page](https://github.com/HeidelTime/heideltime).
 
 ## Usage
@@ -17,12 +23,14 @@ After initialization, a text can be parsed by the parse function by passing the 
 The following code snippet works a simple example.
 
 ```python
+from python_heideltime import Heideltime
+
 heideltime_parser = Heideltime()
 heideltime_parser.set_document_type('NEWS')
 print(heideltime_parser.parse('Yesterday, I bought a cat! It was born earlier this year.'))
 ```
 
-Which should result in the following output (in regard to your current date).
+Which should result in the following output (with regard to your current date).
 
 ```
 <?xml version="1.0"?>
