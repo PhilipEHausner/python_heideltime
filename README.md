@@ -1,10 +1,16 @@
 # Python_HeidelTime
-This projects implements a Python Wrapper for the temporal tagger [HeidelTime](https://github.com/HeidelTime/heideltime). To achieve that, it makes use of the HeidelTime-standalone program.
+This projects implements a Python Wrapper for the temporal tagger [HeidelTime](https://github.com/HeidelTime/heideltime). To achieve that, it makes use of the HeidelTime-standalone application. We only tested this code for Debian based systems and cannot guarantee functionality for other systems.
 
 ## Installation
 To use Python_HeidelTime, it is necessary to install HeidelTime-standalone first. A current download can be found on their [releases page](https://github.com/HeidelTime/heideltime/releases). At the point of the development of this project, version 2.2.1 was the most current one. Support for newer or older versions is not guaranteed. A detailed description of the installation process is found in the [HeidelTime Standalone Manual](https://gate.ac.uk/gate/plugins/Tagger_GATE-Time/doc/HeidelTime-Standalone-Manual.pdf)
 
-For usage in Python, it is sufficient to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to Heideltime-standalone has to specified as a string object.
+For convenience we also provide you with a installation script for HeidelTime-standalone that does everything (including changing the appropriate config files) for you. Just type the following into your console:
+```
+chmod +x install_heideltime_standalone.sh
+./install_heideltime_standalone.sh
+```
+
+If you do not want to use this script, you need to install HeidelTime-standalone yourself. Additionally, it is necessary to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to Heideltime-standalone has to specified as a string object.
 
 For system wide usage a setup.py is provided that installs python_heideltime as a package. It can be used for installation by:
 ```
