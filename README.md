@@ -10,6 +10,8 @@ chmod +x install_heideltime_standalone.sh
 ./install_heideltime_standalone.sh
 ```
 
+Do not move the files after installation, HeidelTime requires absolute paths in its config files!
+
 If you do not want to use this script, you need to install HeidelTime-standalone yourself. Additionally, it is necessary to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to Heideltime-standalone has to specified as a string object.
 
 For system wide usage a setup.py is provided that installs python_heideltime as a package. It can be used for installation by:
