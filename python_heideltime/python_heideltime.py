@@ -16,7 +16,7 @@
 
 import subprocess
 import tempfile
-import config_Heideltime as hcfg
+from .config_Heideltime import Heideltime_path
 
 # calls the HeidelTime standalone application
 # documentation: https://gate.ac.uk/gate/plugins/Tagger_GATE-Time/doc/HeidelTime-Standalone-Manual.pdf
@@ -25,12 +25,12 @@ class Heideltime:
     # all parameters are explained in the HeidelTime standalone documentation
     def __init__(self):
         # assure that path to HeidelTime is in the correct format
-        if hcfg.Heideltime_path == None:
+        if Heideltime_path is None:
             raise ValueError('Please specify the path to HeidelTime-standalone in config_Heideltime.py.')
-        elif hcfg.Heideltime_path[-1] == '/':
-            self.heidel_path = hcfg.Heideltime_path[:-1]
+        elif Heideltime_path[-1] == '/':
+            self.heidel_path = Heideltime_path[:-1]
         else:
-            self.heidel_path = hcfg.Heideltime_path
+            self.heidel_path = Heideltime_path
         self.document_time = None
         self.language = 'ENGLISH'
         self.doc_type = 'NARRATIVES'
