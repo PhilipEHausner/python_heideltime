@@ -27,7 +27,11 @@ cd ..
 wget --no-verbose https://github.com/HeidelTime/heideltime/releases/download/VERSION2.2.1/heideltime-standalone-2.2.1.tar.gz
 tar xzf heideltime-standalone-2.2.1.tar.gz
 
+
 cd heideltime-standalone
+
+# store directory for later
+heideltime_dir=$(pwd)
 
 # alter config file for HeidelTime-standalone
 sed -i "s/\(considerDuration *= *\).*/\1false/" config.props
@@ -38,12 +42,12 @@ original_str="treeTaggerHome = SET ME IN CONFIG.PROPS! (e.g., /home/jannik/treet
 sed -i "s~$original_str~$treetagger_dir~" config.props
 
 # alter config file for python_heideltime
-cd ../..
+cd ../../python_heideltime
 rm config_Heideltime.py
-wget --no-verbose https://raw.githubusercontent.com/PhilipEHausner/python_heideltime/master/config_Heideltime.py
+wget --no-verbose https://raw.githubusercontent.com/PhilipEHausner/python_heideltime/master/python_heideltime/config_Heideltime.py
 
-original_str="Heideltime_path = 'YOUR PATH HERE'"
-replace_str="Heideltime_path = 'heideltime-standalone/heideltime-standalone'"
+original_str="Heideltime_path = '/path/to/heideltime/'"
+replace_str="Heideltime_path = '$heideltime_dir'"
 sed -i "s~$original_str~$replace_str~" config_Heideltime.py
 
 echo "HeidelTime-standalone installed successfully. Config files altered."
