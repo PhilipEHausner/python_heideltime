@@ -4,7 +4,7 @@ with open('README.md', 'r') as f:
     long_description = f.read()
     
 setuptools.setup(
-    name="python_heideltime_philipehausner",
+    name="python_heideltime",
     version=1.0,
     author="Philip Hausner",
     author_email="hausner@informatik.uni-heidelberg.de",
