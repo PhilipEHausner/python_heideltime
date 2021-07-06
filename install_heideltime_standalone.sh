@@ -34,9 +34,10 @@ cd heideltime-standalone
 heideltime_dir=$(pwd)
 
 # alter config file for HeidelTime-standalone
-sed -i "s/\(considerDuration *= *\).*/\1false/" config.props
-sed -i "s/\(considerSet *= *\).*/\1false/" config.props
-sed -i "s/\(considerTime *= *\).*/\1false/" config.props
+# sed -i "s/\(considerDate *= *\).*/\1false/" config.props
+# sed -i "s/\(considerDuration *= *\).*/\1false/" config.props
+# sed -i "s/\(considerSet *= *\).*/\1false/" config.props
+# sed -i "s/\(considerTime *= *\).*/\1false/" config.props
 
 original_str="treeTaggerHome = SET ME IN CONFIG.PROPS! (e.g., /home/jannik/treetagger)"
 sed -i "s~$original_str~$treetagger_dir~" config.props

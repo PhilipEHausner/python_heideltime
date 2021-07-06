@@ -9,9 +9,11 @@ For convenience we also provide you with a installation script for HeidelTime-st
 chmod +x install_heideltime_standalone.sh
 ./install_heideltime_standalone.sh
 ```
-If your operating system is Mac OSX, you need to download the appropriate treetagger for your osx. Replace the line 15 in ```install_heideltime_standalone.sh``` with ```wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.2.tar.gz```. You then need to manually give the path to the treetagger in ```config.props``` for the HeidelTime-standalone installation. 
+If your operating system is Mac OSX, you need to download the appropriate treetagger for your osx. Replace the line 15 in ```install_heideltime_standalone.sh``` with ```wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.2.tar.gz```. You then need to manually give the path to the treetagger in ```config.props``` for the HeidelTime-standalone installation.
 
 Do not move the files after installation, HeidelTime requires absolute paths in its config files!
+
+In the ```config.props``` file of HeidelTime, you can also specify if you want to limit HeidelTime to detect only Timex3 expressions of certain types (data, duration, set, and time).
 
 If you do not want to use this script, you need to install HeidelTime-standalone yourself. Additionally, it is necessary to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to HeidelTime-standalone has to specified as a string object.
 
