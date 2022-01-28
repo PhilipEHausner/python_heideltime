@@ -12,7 +12,7 @@ cd heideltime-standalone/treetagger
 treetagger_dir="treeTaggerHome = "$(pwd)
 
 # download treetagger files
-wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.2.tar.gz 
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.4.tar.gz 
 wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tagger-scripts.tar.gz 
 wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/install-tagger.sh 
 wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german.par.gz 
