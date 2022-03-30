@@ -21,14 +21,15 @@ import regex
 from .config_Heideltime import Heideltime_path
 
 # Taken from the documentation linked below
-AVAILABLE_LANGUAGES = ['ENGLISH', 'GERMAN', 'DUTCH', 'ENGLISHCOLL', 'ENGLISHSCI', 'SPANISH', 'ITALIAN',
-                       'ARABIC', 'VIETNAMESE', 'FRENCH', 'CHINESE', 'RUSSIAN', 'CROATIAN', 'PORTUGUESE', 'ESTONIAN']
-AVAILABLE_DOCUMENT_TYPES = ['NARRATIVES', 'NEWS', 'COLLOQUIAL', 'SCIENTIFIC']
-AVAILABLE_OUTPUT_TYPES = ['XMI', 'TIMEML']  # TODO: Add JSON output by parsing XML from Heideltime
+AVAILABLE_LANGUAGES = ['ARABIC', 'CHINESE', 'CROATIAN', 'DUTCH', 'ENGLISH', 'ENGLISHCOLL', 'ENGLISHSCI', 'ESTONIAN',
+                       'FRENCH', 'GERMAN', 'ITALIAN', 'PORTUGUESE', 'RUSSIAN', 'SPANISH', 'VIETNAMESE']
+
+AVAILABLE_DOCUMENT_TYPES = ['COLLOQUIAL', 'NARRATIVES', 'NEWS', 'SCIENTIFIC']
+AVAILABLE_OUTPUT_TYPES = ['TIMEML', 'XMI']  # TODO: Add JSON output by parsing XML from Heideltime
 
 
 class Heideltime:
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initializes the most important settings to sensible default values.
         For further parameter explanations, see the documentation for the Heideltime standaloe application here:
@@ -57,7 +58,7 @@ class Heideltime:
         self.pos_tagger = None
 
     # FIXME: called document creation time or dct in HeidelTime, consider updating naming
-    def set_document_time(self, document_time: str):
+    def set_document_time(self, document_time: str) -> None:
         """
         Expects a string in the form of 'YYYY-MM-DD' to specify the document creation time (DCT).
         Only used in combination with 'NEWS' or 'COLLOQUIAL' document types.
@@ -66,59 +67,61 @@ class Heideltime:
             raise ValueError('Incorrect format for document time specified. Please use the \"YYYY-MM-DD\" format.')
         self.document_time = document_time
 
-    def set_language(self, language: str):
+    def set_language(self, language: str) -> None:
         """
         Sets the language of the parser. Available languages according to Heideltime docs are:
-        ENGLISH, GERMAN, DUTCH, ENGLISHCOLL (for -t COLLOQUIAL), ENGLISHSCI (for -t SCIENTIFIC), SPANISH, ITALIAN,
-        ARABIC, VIETNAMESE, FRENCH, CHINESE, RUSSIAN, CROATIAN, PORTUGUESE, ESTONIAN.
+        'ARABIC', 'CHINESE', 'CROATIAN', 'DUTCH', 'ENGLISH', 'ENGLISHCOLL' (for -t COLLOQUIAL),
+        'ENGLISHSCI' (for -t SCIENTIFIC), 'ESTONIAN', 'FRENCH', 'GERMAN', 'ITALIAN', 'PORTUGUESE', 'RUSSIAN',
+        'SPANISH', 'VIETNAMESE'
         """
         if not language.upper() in AVAILABLE_LANGUAGES:
-            raise ValueError(f'Unknown language specified! Please specify one of the supported languages below:\n'
-                             f'{AVAILABLE_LANGUAGES}')
+            raise ValueError(f'Unknown language "{language}" specified! '
+                             f'Please specify one of the supported languages below:\n{AVAILABLE_LANGUAGES}')
         self.language = language.upper()
 
-    def set_document_type(self, doc_type: str):
+    def set_document_type(self, doc_type: str) -> None:
         """
-        Sets the document type. Can be either of 'NARRATIVES', 'NEWS', 'COLLOQUIAL', or 'SCIENTIFIC'.
+        Sets the document type. Can be either of 'COLLOQUIAL', 'NARRATIVES', 'NEWS', or 'SCIENTIFIC'.
         """
         if not doc_type.upper() in AVAILABLE_DOCUMENT_TYPES:
-            raise ValueError(f'Unknown document type specified! Please use one of the following supported document'
-                             f'types: {AVAILABLE_DOCUMENT_TYPES}')
+            raise ValueError(f'Unknown document type "{doc_type}" specified! '
+                             f'Please use one of the following supported document types: {AVAILABLE_DOCUMENT_TYPES}')
         self.doc_type = doc_type
 
-    def set_output_type(self, output_type):
+    def set_output_type(self, output_type) -> None:
         """
-        Set the output type of the parser. Heideltime supports either of 'XMI' or 'TIMEML', and defaults to the latter.
+        Set the output type of the parser. Heideltime supports either of 'TIMEML' or 'XMI', and defaults to the former.
         """
         if not output_type.upper() in AVAILABLE_OUTPUT_TYPES:
-            raise ValueError(f'Unknown output type specified! Plese use one of the following supported output types:'
-                             f'{AVAILABLE_OUTPUT_TYPES}')
+            raise ValueError(f'Unknown output type "{output_type}" specified! '
+                             f'Please use one of the following supported output types: {AVAILABLE_OUTPUT_TYPES}')
         self.output_type = output_type
 
-    def set_encoding(self, encoding):
+    def set_encoding(self, encoding: str) -> None:
         """
         Set the corresponding output encoding used by Heideltime. It is unclear from the original docs,
         which exact encodings are supported.
         """
         self.encoding = encoding
 
-    def set_config_file(self, config_file: str):
+    def set_config_file(self, config_file: str) -> None:
         """
         Set the path of Heideltime config file. Requires a full (absolute) path.
         """
         self.config_file = config_file
 
     # FIXME: Technically, Heideltime supports two different verbosity levels, which we cannot model here.
-    def set_verbosity(self, verbosity: bool):
+    #  The supported options are either -v or -vv, where I assume -vv is a "more verbose" verbose option.
+    def set_verbosity(self, verbosity: bool) -> None:
         self.verbosity = verbosity
 
-    def set_interval_tagger(self, interval_tagger: bool):
+    def set_interval_tagger(self, interval_tagger: bool) -> None:
         self.interval_tagger = interval_tagger
 
-    def set_locale(self, locale: str):
+    def set_locale(self, locale: str) -> None:
         self.locale = locale
 
-    def set_pos_tagger(self, pos_tagger: str):
+    def set_pos_tagger(self, pos_tagger: str) -> None:
         self.pos_tagger = pos_tagger
 
     def parse(self, document: str) -> str:
