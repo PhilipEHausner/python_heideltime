@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
     
 setuptools.setup(
     name="python_heideltime",
-    version=1.0,
+    version="1.1",
     author="Philip Hausner",
     author_email="hausner@informatik.uni-heidelberg.de",
     description="Python wrapper for HeidelTime",
@@ -17,5 +17,5 @@ setuptools.setup(
         "License ;; OSI Approved :: GNU GPL",
         "Operating System :: Debian",
         ],
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     )
