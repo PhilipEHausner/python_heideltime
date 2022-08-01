@@ -9,6 +9,10 @@ For convenience, we provide you with an installation script for HeidelTime stand
 chmod +x install_heideltime_standalone.sh
 ./install_heideltime_standalone.sh
 ```
+Once the script has successfully installed the dependencies, you can install the package with
+```
+python3 -m pip install .
+```
 
 
 In general, to use Python_HeidelTime, it is necessary to install HeidelTime-standalone first. If you choose not to go with the provided script, you may download the current standalone version from Heideltime's [releases page](https://github.com/HeidelTime/heideltime/releases). At the point of the development of this project, version 2.2.1 was the most current one. Support for newer or older versions is not guaranteed. A detailed description of the installation process can be found in the [HeidelTime Standalone Manual](https://gate.ac.uk/gate/plugins/Tagger_GATE-Time/doc/HeidelTime-Standalone-Manual.pdf)
@@ -27,11 +31,7 @@ Do not move the files after the installation; HeidelTime requires absolute paths
 ### Further Configurations
 In the ```config.props``` file of HeidelTime, you can also specify if you want to limit HeidelTime to detect only Timex3 expressions of certain types (data, duration, set, and time).
 
-If you do not want to use this script, you need to install HeidelTime-standalone yourself. Additionally, it is necessary to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to HeidelTime-standalone has to specified as a string object.`  
-For system wide usage a `setup.py` is provided that installs python_heideltime as a package. It can be used for installation by:
-```
-python3 -m pip install .
-```
+If you do not want to use this script, you need to install HeidelTime-standalone yourself. Additionally, it is necessary to specify the installation directory of HeidelTime-standalone in the config_Heideltime.py. Please notice that the path to HeidelTime-standalone has to specified as a string object.  
 
 When using Python_HeidelTime, please also cite HeidelTime itself as stated on their [project page](https://github.com/HeidelTime/heideltime).
 
