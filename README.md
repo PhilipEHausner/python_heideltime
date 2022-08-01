@@ -3,13 +3,16 @@ This projects implements a Python Wrapper for the temporal tagger [HeidelTime](h
 
 
 ## Installation
-To use Python_HeidelTime, it is necessary to install HeidelTime-standalone first. A current download can be found on their [releases page](https://github.com/HeidelTime/heideltime/releases). At the point of the development of this project, version 2.2.1 was the most current one. Support for newer or older versions is not guaranteed. A detailed description of the installation process is found in the [HeidelTime Standalone Manual](https://gate.ac.uk/gate/plugins/Tagger_GATE-Time/doc/HeidelTime-Standalone-Manual.pdf)
 
-For convenience we also provide you with a installation script for HeidelTime-standalone that does everything (including changing the appropriate config files) for you. Just type the following into your console:
+For convenience, we provide you with an installation script for HeidelTime standalone that does everything (including changing the appropriate config files) for you. Navigate to the top-level folder of `python_heideltime` and type the following into your console:
 ```
 chmod +x install_heideltime_standalone.sh
 ./install_heideltime_standalone.sh
 ```
+
+
+In general, to use Python_HeidelTime, it is necessary to install HeidelTime-standalone first. If you choose not to go with the provided script, you may download the current standalone version from Heideltime's [releases page](https://github.com/HeidelTime/heideltime/releases). At the point of the development of this project, version 2.2.1 was the most current one. Support for newer or older versions is not guaranteed. A detailed description of the installation process can be found in the [HeidelTime Standalone Manual](https://gate.ac.uk/gate/plugins/Tagger_GATE-Time/doc/HeidelTime-Standalone-Manual.pdf)
+
 
 
 ### MacOS Installation
