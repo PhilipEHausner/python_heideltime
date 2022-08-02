@@ -22,7 +22,7 @@ In general, to use Python_HeidelTime, it is necessary to install HeidelTime-stan
 ### MacOS Installation
 If your operating system is Mac OSX, you need to download an appropriate treetagger for your OS. Replace line 15 in `install_heideltime_standalone.sh` with 
 ```bash
-wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.2.tar.gz
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.3.tar.gz
 ```
 You then need to manually set the path to the treetagger in `config.props` for the HeidelTime-standalone installation.
 Do not move the files after the installation; HeidelTime requires absolute paths in its config files.
