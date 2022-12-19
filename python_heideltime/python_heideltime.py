@@ -17,6 +17,10 @@
 import subprocess
 import tempfile
 import regex
+import os
+from typing import List, Dict, Optional, Union
+
+from bs4 import BeautifulSoup
 
 from .config_Heideltime import Heideltime_path
 
@@ -25,10 +29,24 @@ AVAILABLE_LANGUAGES = ['ARABIC', 'CHINESE', 'CROATIAN', 'DUTCH', 'ENGLISH', 'ENG
                        'FRENCH', 'GERMAN', 'ITALIAN', 'PORTUGUESE', 'RUSSIAN', 'SPANISH', 'VIETNAMESE']
 
 AVAILABLE_DOCUMENT_TYPES = ['COLLOQUIAL', 'NARRATIVES', 'NEWS', 'SCIENTIFIC']
-AVAILABLE_OUTPUT_TYPES = ['TIMEML', 'XMI']  # TODO: Add JSON output by parsing XML from Heideltime
+AVAILABLE_OUTPUT_TYPES = ['JSON', 'TIMEML', 'XMI']  # TODO: Add JSON output by parsing XML from Heideltime
 
 
 class Heideltime:
+
+    heidel_path: str
+    document_time: Optional[str]
+    language: str
+    doc_type: str
+    otuput_type: str
+    encoding: str
+    config_file: str
+    output_json: bool
+    verbosity: bool
+    interval_tagger: bool
+    local: Optional[str]
+    pos_tagger: Optional[str]
+
     def __init__(self) -> None:
         """
         Initializes the most important settings to sensible default values.
@@ -49,7 +67,9 @@ class Heideltime:
         self.doc_type = 'NARRATIVES'
         self.output_type = 'TIMEML'
         self.encoding = 'UTF-8'
-        self.config_file = self.heidel_path + '/config.props'
+        self.config_file = os.path.join(self.heidel_path, 'config.props')
+
+        self.output_json = False
 
         # these features are not tested and might not work
         self.verbosity = False
@@ -86,16 +106,22 @@ class Heideltime:
         if not doc_type.upper() in AVAILABLE_DOCUMENT_TYPES:
             raise ValueError(f'Unknown document type "{doc_type}" specified! '
                              f'Please use one of the following supported document types: {AVAILABLE_DOCUMENT_TYPES}')
-        self.doc_type = doc_type
+        self.doc_type = doc_type.upper()
 
     def set_output_type(self, output_type) -> None:
         """
         Set the output type of the parser. Heideltime supports either of 'TIMEML' or 'XMI', and defaults to the former.
+        If 'JSON' is selected, internally it will use 'TIMEML', and parse the output here.
         """
         if not output_type.upper() in AVAILABLE_OUTPUT_TYPES:
             raise ValueError(f'Unknown output type "{output_type}" specified! '
                              f'Please use one of the following supported output types: {AVAILABLE_OUTPUT_TYPES}')
-        self.output_type = output_type
+        # Internally handle JSON differently.
+        if output_type.upper() == 'JSON':
+            self.output_json = True
+            self.output_type = 'TIMEML'
+        else:
+            self.output_type = output_type.upper()
 
     def set_encoding(self, encoding: str) -> None:
         """
@@ -124,7 +150,7 @@ class Heideltime:
     def set_pos_tagger(self, pos_tagger: str) -> None:
         self.pos_tagger = pos_tagger
 
-    def parse(self, document: str) -> str:
+    def parse(self, document: str) -> Union[str, List[Dict]]:
         # temporary file since HeidelTime standalone needs input file
         temp = tempfile.NamedTemporaryFile()
         temp.write(document.encode('utf-8'))
@@ -150,4 +176,46 @@ class Heideltime:
         # lastly append the temporary file
         inputs.append(temp.name)
         # execute string in the bash shell
-        return subprocess.check_output(inputs).decode('utf-8')
+        heideltime_result = subprocess.check_output(inputs).decode('utf-8')
+        if self.output_json:
+            return self._convert_to_json(heideltime_result)
+        else:
+            return heideltime_result
+
+    @staticmethod
+    def _convert_to_json(xml_text: str) -> List[Dict]:
+        """
+        Converts tagged texts into JSON-like objects, where individual temporal tags are identified based on the
+        extracted attributes, as well as an exact character position in the raw text.
+        """
+
+        soup = BeautifulSoup(xml_text)
+
+        try:
+            content = soup.findAll("timeml")[0]
+        except IndexError:
+            raise IndexError('Could not process output from Heideltime! Please verify that your output is correct '
+                             'by running with output_type = "TIMEML"')
+
+        # Removes additional newlines added by Heideltime's XML output.
+        # This does not use .strip("\n"), because the original text could in theory contain newlines already
+        # TODO: Write test case to verify behavior of strip vs our method
+        remaining_raw_text = content.text[1:-1]
+        offset = 0
+        tags = content.findAll("timex3")
+
+        json_tags = []
+        for tag in tags:
+            json_tags.append(tag.attrs)
+            json_tags[-1]["text"] = tag.text
+            # Also store the character position within the raw text
+            start_idx = remaining_raw_text.find(tag.text) + offset
+            end_idx = start_idx + len(tag.text)
+            json_tags[-1]["char_pos"] = [start_idx, end_idx]
+
+            # To avoid finding tags with the exact same content
+            cut_length = remaining_raw_text.find(tag.text) + len(tag.text)
+            offset += cut_length
+            remaining_raw_text = remaining_raw_text[cut_length:]
+
+        return json_tags
