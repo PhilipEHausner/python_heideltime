@@ -17,6 +17,12 @@ wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/
 wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/install-tagger.sh 
 wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german.par.gz 
 wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english.par.gz
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish.par.gz
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/portuguese.par.gz
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch.par.gz
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian.par.gz
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french.par.gz
+wget --no-verbose https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian.par.gz
 
 # install treetagger
 sh install-tagger.sh
